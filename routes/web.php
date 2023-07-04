@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\PostController;
+use App\Models\Post;
 use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -28,50 +31,6 @@ Route::get('/about', function () {
     ]);
 });
 
-Route::get('/blog', function () {
-    $blog_posts = [
-        [
-            "title" => "Judul Post Pertama",
-            "slug" => "judul-post-pertama",
-            "author" => "Java Kanaya",
-            "body" => "Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus excepturi magnam perspiciatis, dolorem eos omnis, dicta aut suscipit accusamus hic dolores laborum. Dicta mollitia veniam explicabo voluptate iste tempora cumque aut quasi ea, deleniti corporis ut. Libero, minus illum dolores eveniet dolor animi consectetur labore, quidem adipisci vel quia iusto non odio, suscipit iste error. Tempore nulla, reprehenderit quod dolore iste nam veritatis in rerum odit! Sit voluptatum vitae maxime, nam itaque odit exercitationem voluptatibus, est, ab iure ullam placeat!"
-        ],
-        [
-            "title" => "Judul Post Kedua",
-            "slug" => "judul-post-kedua",
-            "author" => "Kanaya Prada",
-            "body" => "Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus excepturi magnam perspiciatis, dolorem eos omnis, dicta aut suscipit accusamus hic dolores laborum. Dicta mollitia veniam explicabo voluptate iste tempora cumque aut quasi ea, deleniti corporis ut. Libero, minus illum dolores eveniet dolor animi consectetur labore, quidem adipisci vel quia iusto non odio, suscipit iste error. Tempore nulla, reprehenderit quod dolore iste nam veritatis in rerum odit! Sit voluptatum vitae maxime, nam itaque odit exercitationem voluptatibus, est, ab iure ullam placeat! Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus excepturi magnam perspiciatis, dolorem eos omnis, dicta aut suscipit accusamus hic dolores laborum. Dicta mollitia veniam explicabo voluptate iste tempora cumque aut quasi ea, deleniti corporis ut. Libero, minus illum dolores eveniet dolor animi consectetur labore, quidem adipisci vel quia iusto non odio, suscipit iste error. Tempore nulla, reprehenderit quod dolore iste nam veritatis in rerum odit! Sit voluptatum vitae maxime, nam itaque odit exercitationem voluptatibus, est, ab iure ullam placeat!"
-        ]
-    ];
-    return view('posts', [
-        "title" => "Posts",
-        "posts" => $blog_posts
-    ]);
-});
+Route::get('/posts', [PostController::class, 'index']);
 
-Route::get('posts/{slug}', function ($slug) {
-    $blog_posts = [
-        [
-            "title" => "Judul Post Pertama",
-            "slug" => "judul-post-pertama",
-            "author" => "Java Kanaya",
-            "body" => "Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus excepturi magnam perspiciatis, dolorem eos omnis, dicta aut suscipit accusamus hic dolores laborum. Dicta mollitia veniam explicabo voluptate iste tempora cumque aut quasi ea, deleniti corporis ut. Libero, minus illum dolores eveniet dolor animi consectetur labore, quidem adipisci vel quia iusto non odio, suscipit iste error. Tempore nulla, reprehenderit quod dolore iste nam veritatis in rerum odit! Sit voluptatum vitae maxime, nam itaque odit exercitationem voluptatibus, est, ab iure ullam placeat!"
-        ],
-        [
-            "title" => "Judul Post Kedua",
-            "slug" => "judul-post-kedua",
-            "author" => "Kanaya Prada",
-            "body" => "Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus excepturi magnam perspiciatis, dolorem eos omnis, dicta aut suscipit accusamus hic dolores laborum. Dicta mollitia veniam explicabo voluptate iste tempora cumque aut quasi ea, deleniti corporis ut. Libero, minus illum dolores eveniet dolor animi consectetur labore, quidem adipisci vel quia iusto non odio, suscipit iste error. Tempore nulla, reprehenderit quod dolore iste nam veritatis in rerum odit! Sit voluptatum vitae maxime, nam itaque odit exercitationem voluptatibus, est, ab iure ullam placeat! Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus excepturi magnam perspiciatis, dolorem eos omnis, dicta aut suscipit accusamus hic dolores laborum. Dicta mollitia veniam explicabo voluptate iste tempora cumque aut quasi ea, deleniti corporis ut. Libero, minus illum dolores eveniet dolor animi consectetur labore, quidem adipisci vel quia iusto non odio, suscipit iste error. Tempore nulla, reprehenderit quod dolore iste nam veritatis in rerum odit! Sit voluptatum vitae maxime, nam itaque odit exercitationem voluptatibus, est, ab iure ullam placeat!"
-        ]
-    ];
-    $new_post = [];
-    foreach($blog_posts as $post) {
-        if($post['slug'] === $slug) {
-            $new_post = $post;
-        }
-    }
-    return view('post', [
-        "title" => "Single Post",
-        "post" =>$new_post
-    ]);
-});
+Route::get('posts/{slug}', [PostController::class, 'show']);

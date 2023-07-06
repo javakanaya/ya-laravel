@@ -184,6 +184,7 @@ return [
     'aliases' => Facade::defaultAliases()->merge([
         // 'Example' => App\Facades\Example::class,
         'Post' => App\Models\Post::class,
+        'Category' => App\Models\Category::class,
     ])->toArray(),
 
 ];

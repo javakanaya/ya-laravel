@@ -18,4 +18,10 @@ class Post extends Model
         // models post berelasi dengan model kategori
         return $this->belongsTo(Category::class);
     }
+
+    public function user()
+    {
+        // models post berelasi dengan model kategori
+        return $this->belongsTo(User::class);
+    }
 }

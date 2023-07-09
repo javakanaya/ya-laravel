@@ -12,6 +12,7 @@ class Post extends Model
     // biar tahu, field mana saja yang boleh diisi. (pilih salah satu)
     // protected $fillable = ['title', 'excerpt', 'body']; // ini yang boleh create/update
     protected $guarded = ['id']; // ini yang ga boleh di create/update
+    protected $with = ['author', 'category'];
 
     public function category()
     {

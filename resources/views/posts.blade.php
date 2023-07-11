@@ -6,11 +6,15 @@
     <div class="row justify-content-center mb-3">
         <div class="col-md-6">
             <form action="/posts">
-                @if  (request('category'))
+                @if (request('category'))
                     <input type="hidden" name="category" value="{{ request('category') }}">
                 @endif
+                @if (request('author'))
+                    <input type="hidden" name="author" value="{{ request('author') }}">
+                @endif
                 <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="search..." name="search" value="{{ request('search') }}">
+                    <input type="text" class="form-control" placeholder="search..." name="search"
+                        value="{{ request('search') }}">
                     <button class="btn btn-danger" type="submit">Search</button>
                 </div>
             </form>
@@ -26,7 +30,7 @@
                 <p>
                     <small class="text-muted">
                         By:
-                        <a href="/authors/{{ $posts[0]->author->username }}"
+                        <a href="/posts?author={{ $posts[0]->author->username }}"
                             class="text-decoration-none">{{ $posts[0]->author->name }}</a>
                         in
                         <a href="/posts?category={{ $posts[0]->category->slug }}"
@@ -61,7 +65,7 @@
                                 <p>
                                     <small class="text-muted">
                                         By:
-                                        <a href="/authors/{{ $post->author->username }}"
+                                        <a href="/posts?author={{ $post->author->username }}"
                                             class="text-decoration-none">{{ $post->author->name }}</a>
                                         {{ $post->created_at->diffForHumans() }}
                                     </small>
@@ -77,4 +81,6 @@
     @else
         <p class="text-center fs-4">No Post found.</p>
     @endif
+
+    {{ $posts->links() }}
 @endsection

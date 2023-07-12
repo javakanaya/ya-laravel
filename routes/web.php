@@ -40,7 +40,7 @@ Route::get('/posts', [PostController::class, 'index']);
 
 Route::get('posts/{post:slug}', [PostController::class, 'show']);
 
-Route::get('categories/', function(){
+Route::get('categories/', function () {
     return view('categories', [
         'title' => 'Post Categories',
         "active" => 'categories',
@@ -55,7 +55,9 @@ Route::post('/logout', [LoginController::class, 'logout']);
 Route::get('/register', [RegisterController::class, 'index'])->middleware('guest'); //hanya bisa diakses user yang belum login;
 Route::post('/register', [RegisterController::class, 'store']);
 
-Route::get('dashboard', [DashboardController::class, 'index'])->middleware('auth'); //hanya bisa diakses user yang sudah login
+Route::get('dashboard', function () {
+    return view('dashboard.index');
+})->middleware('auth'); //hanya bisa diakses user yang sudah login
 
 
 // kalo ga pake request yang banyak pake ini

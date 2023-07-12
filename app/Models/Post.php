@@ -47,12 +47,18 @@ class Post extends Model
         });
 
         // juga sama kyk diatas tp pake arrow function
-        $query->when($filters['author'] ?? false, fn($query, $author) =>
-            $query->whereHas('author',fn($query) =>
+        $query->when(
+            $filters['author'] ?? false,
+            fn($query, $author) =>
+            $query->whereHas(
+                'author',
+                fn($query) =>
                 $query->where('username', $author)
             )
         );
-
-
+    }
+    public function getRouteKeyName(): string
+    {
+        return 'slug';
     }
 }

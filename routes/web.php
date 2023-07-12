@@ -59,5 +59,8 @@ Route::get('dashboard', function () {
     return view('dashboard.index');
 })->middleware('auth'); //hanya bisa diakses user yang sudah login
 
+
+Route::get('/dashboard/posts/checkSlug', [DashboardPostController::class, 'checkSlug'])->middleware('auth');
+
 // semua nya ditangani di sini
 Route::resource('/dashboard/posts', DashboardPostController::class)->middleware('auth');

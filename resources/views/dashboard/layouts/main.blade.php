@@ -10,16 +10,20 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css" rel="stylesheet">
+
     <!-- Custom styles for this template -->
     <link href="/css/dashboard.css" rel="stylesheet">
+
+    <!-- Feather icons  -->
+    <script src="https://unpkg.com/feather-icons"></script>
 
     {{-- Trix Text Editor --}}
     <link rel="stylesheet" type="text/css" href="https://unpkg.com/trix@2.0.0/dist/trix.css">
     <script type="text/javascript" src="https://unpkg.com/trix@2.0.0/dist/trix.umd.min.js"></script>
-  
+
     {{-- Menghilangkan fungsi upload file pada Trix Editor (secara CSS) --}}
     <style>
-        trix-toolbar [data-trix-button-group="file-tools"]{
+        trix-toolbar [data-trix-button-group="file-tools"] {
             display: none;
         }
     </style>
@@ -39,10 +43,11 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js"
-        integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous">
-    </script>
     <script src="/js/dashboard.js"></script>
+
+    <script>
+        feather.replace()
+    </script>
 </body>
 
 </html>

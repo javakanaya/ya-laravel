@@ -75,10 +75,10 @@
                 .then(data => slug.value = data.slug)
         });
         // Menghilangkan fungsi upload file pada Trix Editor (secara JS) 
-        document.addEventListener('trix-file-acccept'),
+        document.addEventListener('trix-file-acccept',
             function(e) {
                 e.preventDefault();
-            }
+            });
 
         function previewImage() {
             const image = document.querySelector('#image');

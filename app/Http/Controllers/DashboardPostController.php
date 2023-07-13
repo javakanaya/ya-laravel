@@ -7,6 +7,7 @@ use App\Models\Category;
 use Cviebrock\EloquentSluggable\Services\SlugService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 
 class DashboardPostController extends Controller
 {
@@ -39,12 +40,13 @@ class DashboardPostController extends Controller
         $validatedData = $request->validate([
             'title' => 'required|max:255',
             'slug' => ['required', 'unique:posts'],
-            'image' => 'image|file|max:1024', // 1Mb
+            'image' => 'image|file|max:1024',
+            // 1Mb
             'category_id' => 'required',
             'body' => 'required'
         ]);
 
-        if($request->file('image')) {
+        if ($request->file('image')) {
             // menyimpan URL lokasi gambar ke dalam tabel
             $validatedData['image'] = $request->file('image')->store('post-images');
         }
@@ -87,6 +89,8 @@ class DashboardPostController extends Controller
         $rules = [
             'title' => 'required|max:255',
             'category_id' => 'required',
+            'image' => 'image|file|max:1024',
+            // 1Mb
             'body' => 'required'
         ];
 
@@ -96,6 +100,16 @@ class DashboardPostController extends Controller
         }
 
         $validatedData = $request->validate($rules);
+
+
+        if ($request->file('image')) {
+            // menghapus file gambar lama jika ada
+            if ($request->oldImage) {
+                Storage::delete($request->oldImage);
+            }
+            // menyimpan URL lokasi gambar ke dalam tabel
+            $validatedData['image'] = $request->file('image')->store('post-images');
+        }
 
         $validatedData['user_id'] = auth()->user()->id;
         // strip_tags(): untuk menghilangkan tag html di excerptnya
@@ -114,6 +128,11 @@ class DashboardPostController extends Controller
      */
     public function destroy(Post $post)
     {
+        // delete filenya
+        if ($post->image) {
+            Storage::delete($post->image);
+        }
+        // delete di tabel
         Post::destroy($post->id);
 
         return redirect('dashboard/posts')->with('success', 'Post has been deleted!');

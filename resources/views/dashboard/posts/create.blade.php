@@ -5,7 +5,7 @@
         <h1 class="h2">Create New Post</h1>
     </div>
     <div class="col-lg-8">
-        <form class="mb-5" method="post" action="/dashboard/posts">
+        <form class="mb-5" method="post" action="/dashboard/posts" enctype="multipart/form-data">
             @csrf
             <div class="mb-3">
                 <label for="title" class="form-label">Title</label>
@@ -19,8 +19,8 @@
             </div>
             <div class="mb-3">
                 <label for="slug" class="form-label">Slug</label>
-                <input type="text" class="form-control @error('slug') is-invalid @enderror" id="slug"
-                    name="slug" required value="{{ old('slug') }}">
+                <input type="text" class="form-control @error('slug') is-invalid @enderror" id="slug" name="slug"
+                    required value="{{ old('slug') }}">
                 @error('slug')
                     <div class="invalid-feedback">
                         {{ $message }}
@@ -40,8 +40,17 @@
                 </select>
             </div>
             <div class="mb-3">
+                <label for="image" class="form-label">Post Image</label>
+                <input class="form-control @error('image') is-invalid @enderror" type="file" id="image" name="image">
+                @error('image')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
+            @enderror
+            </div>
+            <div class="mb-3">
                 <label for="body" class="form-label">Body</label>
-                @error('title')
+                @error('body')
                     <p class="text-danger">
                         {{ $message }}
                     </p>

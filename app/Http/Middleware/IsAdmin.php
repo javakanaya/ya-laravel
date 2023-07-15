@@ -16,7 +16,7 @@ class IsAdmin
     public function handle(Request $request, Closure $next): Response
     {
         // ini versi paling simple 
-        if (auth()->guest() || auth()->user()->username !== 'javakanaya') { // kalau dia belum login atau kalau dia login, tapi user nya bukan javakanaya
+        if (!auth()->check() || !auth()->user()->is_admin) { // kalau dia belum login atau kalau dia login, tapi user nya bukan javakanaya
             // kasih pesan 403: forbidden
             abort(403);
         }

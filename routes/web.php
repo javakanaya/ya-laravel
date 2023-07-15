@@ -65,4 +65,8 @@ Route::get('/dashboard/posts/checkSlug', [DashboardPostController::class, 'check
 // semua nya ditangani di sini
 Route::resource('/dashboard/posts', DashboardPostController::class)->middleware('auth');
 
+// AUTHORIZATION menggunakan middleware
 Route::resource('/dashboard/categories', AdminCategoryController::class)->except('show')->middleware('admin');
+
+// AUTHORIZATION menggunakan gate
+// Route::resource('/dashboard/categories', AdminCategoryController::class)->except('show');
